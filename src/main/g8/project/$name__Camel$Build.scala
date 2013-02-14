@@ -24,7 +24,7 @@ object BuildSettings {
     // publish to maven repository
     // publishTo := Some(Resolver.file("file", new File(Path.userHome.absolutePath + "/.m2/repository"))),
     resolvers ++= myResolvers
-  )
+  ) ++ net.virtualvoid.sbt.graph.Plugin.graphSettings
 }
 
 object ShellPrompt {
@@ -75,5 +75,5 @@ object $name;format="Camel"$Build extends Build {
     base = file("."),
     settings = buildSettings ++ Seq(
       libraryDependencies ++= commonDeps
-    ) ++ net.virtualvoid.sbt.graph.Plugin.graphSettings)
+    ))
 }
