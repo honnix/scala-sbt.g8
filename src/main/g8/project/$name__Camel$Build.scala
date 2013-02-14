@@ -75,5 +75,5 @@ object $name;format="Camel"$Build extends Build {
     base = file("."),
     settings = buildSettings ++ Seq(
       libraryDependencies ++= commonDeps
-    ))
+    ) ++ net.virtualvoid.sbt.graph.Plugin.graphSettings)
 }
