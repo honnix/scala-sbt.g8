@@ -70,10 +70,15 @@ object $name;format="Camel"$Build extends Build {
     // akka
   )
 
+  lazy val RunDebug = config("debug").extend(Runtime)
+
   lazy val $name;format="camel"$ = Project(
     id = "$name;format="norm"$",
     base = file("."),
     settings = buildSettings ++ Seq(
-      libraryDependencies ++= commonDeps
-    ))
+      libraryDependencies ++= commonDeps,
+      fork in RunDebug := true,
+      scalacOptions ++= Seq("-unchecked"),
+      javaOptions in RunDebug ++= Seq("-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005")
+    ) ++ inConfig(RunDebug)(Defaults.configTasks)).configs(RunDebug)
 }
